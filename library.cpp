@@ -181,9 +181,9 @@ void __fastcall hkCmdQuitGame(const long long param_1)
 
                 // Use Book of Healing
                 SendKeyEvent(g_Block, 1, 0x32, 50, 1); // Down 2
-                SendKeyEvent(g_Block, 1, 0x37, 55, 1); // Down 7
-                Sleep(100);
                 SendKeyEvent(g_Block, 0, 0x32, 50, 1); // Up 2
+                Sleep(100);
+                SendKeyEvent(g_Block, 1, 0x37, 55, 1); // Down 7
                 SendKeyEvent(g_Block, 0, 0x37, 55, 1); // Up 7
                 Sleep(1500); // Wait for the book to take effect
                 //
