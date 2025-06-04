@@ -197,9 +197,9 @@ void __fastcall hkCmdQuitGame(const long long param_1)
 
                         // Enable sloth mode
                         SendKeyEvent(g_Block, 1, 0x32, 50, 1); // Down 2
-                        SendKeyEvent(g_Block, 1, vk_code, scan_code, 1); // Down 1-9
-                        Sleep(100);
                         SendKeyEvent(g_Block, 0, 0x32, 50, 1); // Up 2
+                        Sleep(100);
+                        SendKeyEvent(g_Block, 1, vk_code, scan_code, 1); // Down 1-9
                         SendKeyEvent(g_Block, 0, vk_code, scan_code, 1); // Up 1-9
                         Sleep(1500); // Wait for the potion to take effect
 
