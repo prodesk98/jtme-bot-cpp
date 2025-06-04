@@ -181,10 +181,10 @@ void __fastcall hkCmdQuitGame(const long long param_1)
 
                 // Use Book of Healing
                 SendKeyEvent(g_Block, 1, 0x32, 50, 1); // Down 2
-                SendKeyEvent(g_Block, 0, 0x32, 50, 1); // Up 2
-                Sleep(100);
                 SendKeyEvent(g_Block, 1, 0x37, 55, 1); // Down 7
+                Sleep(100);
                 SendKeyEvent(g_Block, 0, 0x37, 55, 1); // Up 7
+                SendKeyEvent(g_Block, 0, 0x32, 50, 1); // Up 2
                 Sleep(1500); // Wait for the book to take effect
                 //
 
@@ -197,10 +197,10 @@ void __fastcall hkCmdQuitGame(const long long param_1)
 
                         // Enable sloth mode
                         SendKeyEvent(g_Block, 1, 0x32, 50, 1); // Down 2
-                        SendKeyEvent(g_Block, 0, 0x32, 50, 1); // Up 2
-                        Sleep(100);
                         SendKeyEvent(g_Block, 1, vk_code, scan_code, 1); // Down 1-9
+                        Sleep(100);
                         SendKeyEvent(g_Block, 0, vk_code, scan_code, 1); // Up 1-9
+                        SendKeyEvent(g_Block, 0, 0x32, 50, 1); // Up 2
                         Sleep(1500); // Wait for the potion to take effect
 
                         // Check if HP is still below 50% after each potion
@@ -323,11 +323,20 @@ int getSmartDirection() {
                 }
             }
         } else if (GetAsyncKeyState(VK_F2) & 0x8000) {
-             if (!g_KeyPressed) {
-                 g_UseMovementMacro = !g_UseMovementMacro;
-                 printf("[*] Movement macro state: %s\n", g_UseMovementMacro ? "Enabled" : "Disabled");
-                 g_KeyPressed = true;
-             }
+            if (!g_KeyPressed) {
+                g_UseMovementMacro = !g_UseMovementMacro;
+                printf("[*] Movement macro state: %s\n", g_UseMovementMacro ? "Enabled" : "Disabled");
+                g_KeyPressed = true;
+            }
+        }else if (GetAsyncKeyState(VK_F3) & 0x8000) {
+            // TODO: test
+            SendKeyEvent(g_Block, 1, 0x32, 50, 1); // Down 2
+            SendKeyEvent(g_Block, 1, 0x37, 55, 1); // Down 7
+            Sleep(100);
+            SendKeyEvent(g_Block, 0, 0x37, 55, 1); // Up 7
+            SendKeyEvent(g_Block, 0, 0x32, 50, 1); // Up 2
+            Sleep(1500); // Wait for the book to take effect
+            //
         } else {
             g_KeyPressed = false;
         }
