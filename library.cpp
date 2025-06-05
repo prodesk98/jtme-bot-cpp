@@ -177,17 +177,16 @@ void __fastcall hkCmdQuitGame(const long long param_1)
 [[noreturn]] DWORD WINAPI keyPressControllerThread(LPVOID) {
     while (true) {
         if (is_In_combat && g_LocalPlayer != nullptr) {
+            // Use slot 1 -> Book
+            SendKeyEvent(g_Block, 1, 0x32, 50, 1); // Down 2
+            SendKeyEvent(g_Block, 1, 0x37, 55, 1); // Down 7
+            Sleep(100);
+            SendKeyEvent(g_Block, 0, 0x37, 55, 1); // Up 7
+            SendKeyEvent(g_Block, 0, 0x32, 50, 1); // Up 2
+            //
+
             if (static_cast<float>(g_LocalPlayer->getHp()) / static_cast<float>(g_LocalPlayer->getTotalHp()) <= 0.5f) {
                 printf("[*] HP is below 50%%, starting potion usage...\n");
-
-                // Use Book of Healing
-                SendKeyEvent(g_Block, 1, 0x32, 50, 1); // Down 2
-                SendKeyEvent(g_Block, 0, 0x32, 50, 1); // Up 2
-                Sleep(100);
-                SendKeyEvent(g_Block, 1, 0x37, 55, 1); // Down 7
-                SendKeyEvent(g_Block, 0, 0x37, 55, 1); // Up 7
-                Sleep(1500); // Wait for the book to take effect
-                //
 
                 // If HP is still below 50%, use potions
                 if (static_cast<float>(g_LocalPlayer->getHp()) / static_cast<float>(g_LocalPlayer->getTotalHp()) <= 0.5f) {
@@ -329,15 +328,6 @@ int getSmartDirection() {
                 printf("[*] Movement macro state: %s\n", g_UseMovementMacro ? "Enabled" : "Disabled");
                 g_KeyPressed = true;
             }
-        }else if (GetAsyncKeyState(VK_F3) & 0x8000) {
-            // TODO: test
-            SendKeyEvent(g_Block, 1, 0x32, 50, 1); // Down 2
-            SendKeyEvent(g_Block, 0, 0x32, 50, 1); // Up 2
-            Sleep(100);
-            SendKeyEvent(g_Block, 0, 0x37, 55, 1); // Up 7
-            SendKeyEvent(g_Block, 1, 0x37, 55, 1); // Down 7
-            Sleep(1500); // Wait for the book to take effect
-            //
         } else {
             g_KeyPressed = false;
         }
